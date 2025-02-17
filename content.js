@@ -7,34 +7,29 @@ const declineKeywords = {
 };
 
 function getLanguage() {
-    return navigator.language.slice(0, 2); // Get browser language
+    return navigator.language.slice(0, 2);
 }
 
 function declineCookies() {
-    // Define the text you're looking for (case-insensitive)
     const lang = getLanguage();
     const targetTexts = declineKeywords[lang] || declineKeywords["en"];
 
     const elements = document.querySelectorAll('button');
 
-    // Loop through the elements and check their text content
     for (const targetText of targetTexts) {
         for (const element of elements) {
             if (element.innerText.trim().toLowerCase().includes(targetText)) {
                 element.click();
                 console.log('Cookies declined.');
                 observer.disconnect();
-                return; // Exit after clicking the first matching element
+                return;
             }
         }
     }
-    // If no matching element is found
     console.log('No decline button found.');
 }
 
-// Run the function when the page loads
 declineCookies();
 
-// Optionally, observe DOM changes to handle dynamic content
 const observer = new MutationObserver(declineCookies);
 observer.observe(document.body, { childList: true, subtree: true });
