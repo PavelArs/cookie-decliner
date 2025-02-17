@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Cookie Auto Decliner",
+  "version": "1.0",
+  "description": "Automatically declines cookie consent pop-ups.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
